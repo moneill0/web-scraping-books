@@ -25,7 +25,7 @@ for page in range(pages):
     # Access content from page URL
     try:
         driver.get("https://books.toscrape.com/catalogue/page-" + str(page+1) + ".html")
-    except Exception:
+    except Exception: # TODO: correct exception type (message not printing)
         print("Exceeded the number of pages available.")
         break
     content = driver.page_source
