@@ -15,19 +15,19 @@ df = pd.DataFrame()
 options = webdriver.ChromeOptions()
 driver = webdriver.Chrome(options=options)
 
-
-
 # Set the number of pages you want to scrape data from
-pages = 51
+pages = 50
 
 for page in range(pages):
-    print("Extracting data from page " + str(page+1))
-    # Access content from page URL
-    try:
-        driver.get("https://books.toscrape.com/catalogue/page-" + str(page+1) + ".html")
-    except Exception: # TODO: correct exception type (message not printing)
+    # Handle out-of-range page number
+    if page >= 50:
         print("Exceeded the number of pages available.")
         break
+
+    print("Extracting data from page " + str(page+1))
+    
+    # Access content from page URL
+    driver.get("https://books.toscrape.com/catalogue/page-" + str(page+1) + ".html")
     content = driver.page_source
     soup = BeautifulSoup(content, features="lxml")
 
